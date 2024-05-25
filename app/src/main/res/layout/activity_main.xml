@@ -15,87 +15,61 @@
         android:layout_gravity="center">
 
         <LinearLayout
-            android:layout_marginVertical="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/_20sdp"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/text_bold_20"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/karma"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="25dp"
-                android:textStyle="bold" />
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/belgrano"
+                android:text="@string/app_name" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp"
+                style="@style/edit_18"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:drawableLeft="@drawable/people"
-                android:drawablePadding="8dp"
-                android:hint="Username"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white_transparent" />
+                android:hint="Username" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
+                style="@style/edit_18"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:drawableLeft="@drawable/icons8_lock_500"
-                android:drawablePadding="8dp"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:maxLength="8"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white_transparent" />
+                android:maxLength="8" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp">
 
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/button_20"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_button"
-                    android:text="Login"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    app:backgroundTint="@null" />
+                    android:text="Login" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/text_20"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Sign Up"
-                    android:textColor="@color/white_transparent"
-                    android:textSize="20dp" />
+                    android:text="Sign Up" />
 
             </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/text_16"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:text="Forgot Password"
-                android:textColor="@color/white"
-                android:textSize="16dp" />
+                android:layout_marginTop="@dimen/_50sdp"
+                android:text="Forgot Password" />
         </LinearLayout>
     </ScrollView>
 
