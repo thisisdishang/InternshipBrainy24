@@ -30,16 +30,18 @@
                 style="@style/text_bold_20"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:fontFamily="@font/belgrano"
+                android:fontFamily="@font/karma"
                 android:text="@string/app_name" />
 
             <EditText
+                android:id="@+id/main_username"
                 style="@style/edit_18"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:drawableLeft="@drawable/people"
                 android:hint="Username" />
 
             <EditText
+                android:id="@+id/main_password"
                 style="@style/edit_18"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:drawableLeft="@drawable/icons8_lock_500"
@@ -54,11 +56,13 @@
                 android:layout_marginTop="@dimen/_20sdp">
 
                 <Button
+                    android:id="@+id/main_login"
                     style="@style/button_20"
                     android:layout_weight="1"
                     android:text="Login" />
 
                 <TextView
+                    android:id="@+id/main_signup"
                     style="@style/text_20"
                     android:layout_weight="1"
                     android:text="Sign Up" />
@@ -66,6 +70,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/main_forgot"
                 style="@style/text_16"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_50sdp"
