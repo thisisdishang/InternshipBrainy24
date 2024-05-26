@@ -86,16 +86,18 @@ public class MainActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                //startActivity(intent);
+                new CommonMethod(MainActivity.this,SignupActivity.class);
             }
         });
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+                //startActivity(intent);
+                new CommonMethod(MainActivity.this,ForgotPasswordActivity.class);
             }
         });
     }

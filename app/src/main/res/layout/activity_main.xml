@@ -51,7 +51,7 @@
                     android:drawableLeft="@drawable/icons8_lock_500"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:maxLength="8" />
+                    android:maxLength="12" />
 
                 <ImageView
                     android:id="@+id/main_password_hidden"
