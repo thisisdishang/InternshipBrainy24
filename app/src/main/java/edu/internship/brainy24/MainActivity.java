@@ -72,10 +72,13 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     System.out.println("Login Successfully");
                     Log.d("My Response", "Login Successfully");
-                    Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_LONG).show();
-                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-                    startActivity(intent);
+                    //Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                    new CommonMethod(MainActivity.this, "Login Successfully");
+                    //Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_LONG).show();
+                    new CommonMethod(view, "Login Successfully");
+                    //Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                    //startActivity(intent);
+                    new CommonMethod(MainActivity.this, DashboardActivity.class);
                 }
             }
         });
