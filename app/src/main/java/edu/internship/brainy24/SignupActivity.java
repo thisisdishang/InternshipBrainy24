@@ -2,6 +2,8 @@ package edu.internship.brainy24;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -35,10 +37,18 @@ public class SignupActivity extends AppCompatActivity {
 
     String sCity = "";
 
+    String sGender = "";
+
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        db = openOrCreateDatabase("InternshipBrainy24.db", MODE_PRIVATE, null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY,USERNAME VARCHAR(100),NAME VARCHAR(100),EMAIL VARCHAR(100),CONTACT BIGINT(10),PASSWORD VARCHAR(20),GENDER VARCHAR(6),CITY VARCHAR(20))";
+        db.execSQL(tableQuery);
 
         username = findViewById(R.id.signup_username);
         name = findViewById(R.id.signup_name);
@@ -125,9 +135,18 @@ public class SignupActivity extends AppCompatActivity {
                 } else if (!terms.isChecked()) {
                     new CommonMethod(SignupActivity.this, "Please Accept Terms & Condition");
                 } else {
-                    new CommonMethod(SignupActivity.this, "Signup Successfully");
-                    new CommonMethod(view, "Signup Successfully");
-                    onBackPressed();
+                    String selectQuery = "SELECT * FROM USERS WHERE USERNAME='" + username.getText().toString() + "' OR EMAIL='" + email.getText().toString() + "' OR CONTACT='" + contact.getText().toString() + "'";
+                    Cursor cursor = db.rawQuery(selectQuery, null);
+                    if (cursor.getCount() > 0) {
+                        new CommonMethod(SignupActivity.this, "Email ID / Contact No Already Registered");
+                        new CommonMethod(view, "Username/Email ID/Contact No Already Registered");
+                    } else {
+                        String insertQuery = "INSERT INTO USERS VALUES(NULL,'" + username.getText().toString() + "','" + name.getText().toString() + "','" + email.getText().toString() + "','" + contact.getText().toString() + "','" + password.getText().toString() + "','" + sGender + "','" + sCity + "')";
+                        db.execSQL(insertQuery);
+                        new CommonMethod(SignupActivity.this, "Signup Successfully");
+                        new CommonMethod(view, "Signup Successfully");
+                        onBackPressed();
+                    }
                 }
             }
         });
@@ -151,7 +170,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = findViewById(i);
-                new CommonMethod(SignupActivity.this, radioButton.getText().toString());
+                sGender = radioButton.getText().toString();
+                new CommonMethod(SignupActivity.this, sGender);
             }
         });
 
