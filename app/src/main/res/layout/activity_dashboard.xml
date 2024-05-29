@@ -22,6 +22,12 @@
         android:text="Profile" />
 
     <Button
+        android:id="@+id/dashboard_category"
+        style="@style/button_20"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Category" />
+
+    <Button
         android:id="@+id/dashboard_logout"
         style="@style/button_20"
         android:layout_marginTop="@dimen/_10sdp"
