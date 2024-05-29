@@ -42,10 +42,12 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if (sp.getString(ConstantSp.USERID, "").equalsIgnoreCase("")) {
                     new CommonMethod(SplashActivity.this, MainActivity.class);
+                    finish();
                 } else {
                     new CommonMethod(SplashActivity.this, DashboardActivity.class);
+                    finish();
                 }
             }
-        }, 5000);
+        }, 7000);
     }
 }

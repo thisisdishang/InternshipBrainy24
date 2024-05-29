@@ -7,7 +7,7 @@
     android:background="@drawable/custom_background"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".SignupActivity">
+    tools:context=".ProfileActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,21 +22,21 @@
 
 
             <EditText
-                android:id="@+id/signup_username"
+                android:id="@+id/profile_username"
                 style="@style/edit_18"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:drawableLeft="@drawable/people"
                 android:hint="Username" />
 
             <EditText
-                android:id="@+id/signup_name"
+                android:id="@+id/profile_name"
                 style="@style/edit_18"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:drawableLeft="@drawable/people"
                 android:hint="Name" />
 
             <EditText
-                android:id="@+id/signup_emailid"
+                android:id="@+id/profile_emailid"
                 style="@style/edit_18"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:drawableLeft="@drawable/outline_attach_email_24"
@@ -44,7 +44,7 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/signup_contactno"
+                android:id="@+id/profile_contactno"
                 style="@style/edit_18"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:drawableLeft="@drawable/outline_add_ic_call_24"
@@ -53,12 +53,13 @@
                 android:maxLength="10" />
 
             <FrameLayout
+                android:id="@+id/profile_password_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13.00dp">
 
                 <EditText
-                    android:id="@+id/signup_password"
+                    android:id="@+id/profile_password"
                     style="@style/edit_18"
                     android:drawableLeft="@drawable/icons8_lock_500"
                     android:hint="Password"
@@ -66,7 +67,7 @@
                     android:maxLength="12" />
 
                 <ImageView
-                    android:id="@+id/signup_password_hidden"
+                    android:id="@+id/profile_password_hidden"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_gravity="end|center"
@@ -75,7 +76,7 @@
                     android:visibility="gone" />
 
                 <ImageView
-                    android:id="@+id/signup_password_show"
+                    android:id="@+id/profile_password_show"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_gravity="end|center"
@@ -84,12 +85,13 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/profile_confirm_password_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13.00dp">
 
                 <EditText
-                    android:id="@+id/signup_confirm_password"
+                    android:id="@+id/profile_confirm_password"
                     style="@style/edit_18"
                     android:drawableLeft="@drawable/icons8_lock_500"
                     android:hint="Confirm Password"
@@ -97,7 +99,7 @@
                     android:maxLength="12" />
 
                 <ImageView
-                    android:id="@+id/signup_confirm_password_hidden"
+                    android:id="@+id/profile_confirm_password_hidden"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_gravity="end|center"
@@ -106,7 +108,7 @@
                     android:visibility="gone" />
 
                 <ImageView
-                    android:id="@+id/signup_confirm_password_show"
+                    android:id="@+id/profile_confirm_password_show"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_gravity="end|center"
@@ -115,7 +117,7 @@
             </FrameLayout>
 
             <RadioGroup
-                android:id="@+id/signup_gender"
+                android:id="@+id/profile_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_20sdp"
@@ -123,13 +125,13 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/signup_male"
+                    android:id="@+id/profile_male"
                     style="@style/radio_18"
                     android:layout_weight="1"
                     android:text="Male" />
 
                 <RadioButton
-                    android:id="@+id/signup_female"
+                    android:id="@+id/profile_female"
                     style="@style/radio_18"
                     android:layout_weight="1"
                     android:text="Female" />
@@ -137,28 +139,25 @@
             </RadioGroup>
 
             <Spinner
-                android:id="@+id/signup_city"
+                android:id="@+id/profile_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp" />
-
-            <CheckBox
-                android:id="@+id/signup_terms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:buttonTint="@color/white"
-                android:text="Terms &amp; Condition"
-                android:textColor="@color/white" />
-
+            
             <Button
-                android:id="@+id/signup_button"
+                android:id="@+id/profile_edit"
                 style="@style/button_20"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:text="Signup" />
+                android:text="Edit Profile" />
+
+            <Button
+                android:id="@+id/profile_submit"
+                style="@style/button_20"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Submit" />
 
 
         </LinearLayout>
