@@ -10,15 +10,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHolder> {
     Context context;
-    String[] nameArray;
-    int[] imageArray;
+    ArrayList<CategoryList> arrayList;
+//    String[] nameArray;
+//    int[] imageArray;
 
-    public CategoryAdapter(Context context, String[] nameArray, int[] imageArray) {
+//    public CategoryAdapter(Context context, String[] nameArray, int[] imageArray) {
+//        this.context = context;
+//        this.nameArray = nameArray;
+//        this.imageArray = imageArray;
+//    }
+
+    public CategoryAdapter(Context context, ArrayList<CategoryList> arrayList) {
         this.context = context;
-        this.nameArray = nameArray;
-        this.imageArray = imageArray;
+        this.arrayList = arrayList;
     }
 
     @NonNull
@@ -40,14 +48,26 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHold
         }
     }
 
+//    @Override
+//    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+//        holder.imageView.setImageResource(imageArray[position]);
+//        holder.name.setText(nameArray[position]);
+//    }
+
+
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        holder.imageView.setImageResource(imageArray[position]);
-        holder.name.setText(nameArray[position]);
+        holder.imageView.setImageResource(Integer.parseInt(arrayList.get(position).getImage()));
+        holder.name.setText(arrayList.get(position).getName());
     }
+
+//    @Override
+//    public int getItemCount() {
+//        return nameArray.size;
+//    }
 
     @Override
     public int getItemCount() {
-        return nameArray.length;
+        return arrayList.size();
     }
 }
