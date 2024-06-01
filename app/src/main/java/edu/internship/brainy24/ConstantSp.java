@@ -12,5 +12,9 @@ public class ConstantSp {
     public static final String CITY = "city";
     public static final String CATEGORY_ID = "categoryid";
     public static final String CATEGORY_NAME = "categoryname";
+    public static final String SUB_CATEGORY_ID = "subcategoryid";
+    public static final String SUB_CATEGORY_NAME = "subcategoryname";
+    public static final String PRICE_SYMBOL = "₹ ";
+    public static final String PRODUCT_ID = "productid";
 
 }
