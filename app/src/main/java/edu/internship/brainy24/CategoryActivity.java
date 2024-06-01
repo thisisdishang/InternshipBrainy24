@@ -50,10 +50,10 @@ public class CategoryActivity extends AppCompatActivity {
         //recyclerView.setLayoutManager(new LinearLayoutManager(CategoryActivity.this));
 
         //Set As Grid
-        //recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
         //Set As Scroll
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
+        //recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -69,7 +69,7 @@ public class CategoryActivity extends AppCompatActivity {
         }
 
         //CategoryAdapter adapter = new CategoryAdapter(CategoryActivity.this, nameArray, imageArray);
-        CategoryAdapter adapter = new CategoryAdapter(CategoryActivity.this,arrayList);
+        CategoryAdapter adapter = new CategoryAdapter(CategoryActivity.this, arrayList);
         recyclerView.setAdapter(adapter);
 
     }
