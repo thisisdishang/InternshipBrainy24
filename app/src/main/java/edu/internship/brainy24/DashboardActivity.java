@@ -14,7 +14,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     TextView name;
     SharedPreferences sp;
-    Button profile, logout, category;
+    Button profile, logout, category, wishlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
         profile = findViewById(R.id.dashboard_profile);
         logout = findViewById(R.id.dashboard_logout);
         category = findViewById(R.id.dashboard_category);
+        wishlist = findViewById(R.id.dashboard_wishlist);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +66,13 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new CommonMethod(DashboardActivity.this, CategoryActivity.class);
+            }
+        });
+
+        wishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this, WishlistActivity.class);
             }
         });
 
