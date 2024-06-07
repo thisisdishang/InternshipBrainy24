@@ -23,9 +23,7 @@ public class ProductActivity extends AppCompatActivity {
     String[] descriptionArray = {"Off white solid opaque casual shirt ,has a spread collar, button placket, long regular sleeves, curved hem", "Blue solid opaque Casual shirt, has a spread collar, button placket, 1 patch pocket, long regular sleeves, curved hem", "Mustard navy blue T-shirt for men Brand logo print Regular length Polo collar Short, regular sleeves Knitted cotton fabric"};
     String[] priceArray = {"1999", "1499", "699"};
     ArrayList<ProductList> arrayList;
-
     SQLiteDatabase db;
-
     SharedPreferences sp;
 
     @Override
@@ -47,6 +45,9 @@ public class ProductActivity extends AppCompatActivity {
 
         String productTableQuery = "CREATE TABLE IF NOT EXISTS PRODUCT(PRODUCTID INTEGER PRIMARY KEY,SUBCATEGORYID VARCHAR(10),CATEGORYID VARCHAR(10),NAME VARCHAR(100),IMAGE VARCHAR(100),PRICE VARCHAR(20),DESCRIPTION TEXT)";
         db.execSQL(productTableQuery);
+
+        String wishlistTableQuery = "CREATE TABLE IF NOT EXISTS WISHLIST(WISHLISTID INTEGER PRIMARY KEY,USERID VARCHAR(10),PRODUCTID VARCHAR(10))";
+        db.execSQL(wishlistTableQuery);
 
 
         for (int i = 0; i < nameArray.length; i++) {
@@ -85,14 +86,25 @@ public class ProductActivity extends AppCompatActivity {
                 list.setImage(cursor.getString(4));
                 list.setPrice(cursor.getString(5));
                 list.setDescription(cursor.getString(6));
+
+                String selectQueryWishlist = "SELECT * FROM WISHLIST WHERE USERID='" + sp.getString(ConstantSp.USERID, "") + "' AND PRODUCTID='" + cursor.getString(0) + "'";
+                Cursor cursorWishlist = db.rawQuery(selectQueryWishlist, null);
+                if (cursorWishlist.getCount() > 0) {
+                    list.setWishlist(true);
+                    while (cursorWishlist.moveToNext()) {
+                        list.setWishlistid(cursorWishlist.getString(0));
+                    }
+                } else {
+                    list.setWishlist(false);
+                    list.setWishlistid("0");
+                }
                 arrayList.add(list);
             }
             //CategoryAdapter adapter = new CategoryAdapter(CategoryActivity.this, nameArray, imageArray);
-            ProductAdapter adapter = new ProductAdapter(ProductActivity.this, arrayList);
+            ProductAdapter adapter = new ProductAdapter(ProductActivity.this, arrayList, sp, db);
             recyclerView.setAdapter(adapter);
         } else {
             new CommonMethod(ProductActivity.this, "Product Not Found");
         }
-
     }
 }

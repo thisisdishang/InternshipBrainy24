@@ -1,6 +1,25 @@
 package edu.internship.brainy24;
 
 public class ProductList {
+    String wishlistid, id, categoryId, subcategoryId, name, image, description, price;
+    boolean isWishlist;
+
+    public boolean isWishlist() {
+        return isWishlist;
+    }
+
+    public void setWishlist(boolean wishlist) {
+        isWishlist = wishlist;
+    }
+
+    public String getWishlistid() {
+        return wishlistid;
+    }
+
+    public void setWishlistid(String wishlistid) {
+        this.wishlistid = wishlistid;
+    }
+
     public String getId() {
         return id;
     }
@@ -56,6 +75,4 @@ public class ProductList {
     public void setPrice(String price) {
         this.price = price;
     }
-
-    String id,categoryId,subcategoryId,name,image,description,price;
 }
