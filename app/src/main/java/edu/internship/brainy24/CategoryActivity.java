@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class CategoryActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    String[] nameArray = {"Shirts", "T-Shirts", "Jeans", "Shorts & Trousers", "Casual Shoes", "Infant Essentials"};
+    String[] nameArray = {"Shirts", "T-Shirts", "Jeans", "Shorts & Trousers", "Shoes", "Infant Essentials"};
     int[] imageArray = {R.drawable.shirt, R.drawable.tshirt, R.drawable.jeans, R.drawable.trouser, R.drawable.shoe, R.drawable.infant};
 
     ArrayList<CategoryList> arrayList;

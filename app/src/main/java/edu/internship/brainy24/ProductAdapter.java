@@ -20,14 +20,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
     SharedPreferences sp;
     SQLiteDatabase db;
     ArrayList<ProductList> arrayList;
-    boolean isWishlist = false;
 
-
-    public ProductAdapter(Context context, ArrayList<ProductList> arrayList, SharedPreferences sp, SQLiteDatabase db) {
+    public ProductAdapter(Context context, ArrayList<ProductList> arrayList, SQLiteDatabase db) {
         this.context = context;
         this.arrayList = arrayList;
-        this.sp = sp;
         this.db = db;
+        sp = context.getSharedPreferences(ConstantSp.PREF, Context.MODE_PRIVATE);
     }
 
     @NonNull
@@ -39,8 +37,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
 
     public class MyHolder extends RecyclerView.ViewHolder {
 
-        ImageView imageView, wishlist;
-        TextView name, price;
+        ImageView imageView, wishlist, cart;
+        TextView name, price, brand;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,6 +46,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
             name = itemView.findViewById(R.id.custom_product_name);
             price = itemView.findViewById(R.id.custom_product_price);
             wishlist = itemView.findViewById(R.id.custom_product_wishlist);
+            cart = itemView.findViewById(R.id.custom_product_cart);
+            brand = itemView.findViewById(R.id.custom_product_brand);
         }
     }
 
@@ -56,6 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
         holder.imageView.setImageResource(Integer.parseInt(arrayList.get(position).getImage()));
         holder.name.setText(arrayList.get(position).getName());
         holder.price.setText(ConstantSp.PRICE_SYMBOL + arrayList.get(position).getPrice());
+        holder.brand.setText(arrayList.get(position).getBrand());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,26 +68,47 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
 
         if (arrayList.get(position).isWishlist()) {
             holder.wishlist.setImageResource(R.drawable.wishlist_fill);
-            isWishlist = true;
         } else {
             holder.wishlist.setImageResource(R.drawable.wishlist_empty);
-            isWishlist = false;
         }
 
         holder.wishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isWishlist) {
-                    String deleteQuery = "DELETE FROM WISHLIST WHERE USERID='" + sp.getString(ConstantSp.USERID, "") + "' AND PRODUCTID='" + arrayList.get(position).getId() + "'";
+                if (arrayList.get(position).isWishlist) {
+                    String deleteQuery = "DELETE FROM WISHLIST WHERE USERID='" + sp.getString(ConstantSp.USERID, "") + "' AND PRODUCTID='" + sp.getString(ConstantSp.PRODUCT_ID, "") + "'";
                     db.execSQL(deleteQuery);
-                    holder.wishlist.setImageResource(R.drawable.wishlist_empty);
-                    isWishlist = false;
+
+                    ProductList list = new ProductList();
+                    list.setId(arrayList.get(position).getId());
+                    list.setCategoryId(arrayList.get(position).getCategoryId());
+                    list.setSubcategoryId(arrayList.get(position).getSubcategoryId());
+                    list.setName(arrayList.get(position).getName());
+                    list.setImage(arrayList.get(position).getImage());
+                    list.setPrice(arrayList.get(position).getPrice());
+                    list.setDescription(arrayList.get(position).getDescription());
+                    list.setWishlist(false);
+                    arrayList.set(position, list);
+
+                    // holder.wishlist.setImageResource(R.drawable.wishlist_empty);
                 } else {
-                    String insertQuery = "INSERT INTO WISHLIST VALUES (NULL,'" + sp.getString(ConstantSp.USERID, "") + "','" + arrayList.get(position).getId() + "')";
+                    String insertQuery = "INSERT INTO WISHLIST VALUES(NULL,'" + sp.getString(ConstantSp.USERID, "") + "','" + sp.getString(ConstantSp.PRODUCT_ID, "") + "')";
                     db.execSQL(insertQuery);
-                    holder.wishlist.setImageResource(R.drawable.wishlist_fill);
-                    isWishlist = true;
+
+                    ProductList list = new ProductList();
+                    list.setId(arrayList.get(position).getId());
+                    list.setCategoryId(arrayList.get(position).getCategoryId());
+                    list.setSubcategoryId(arrayList.get(position).getSubcategoryId());
+                    list.setName(arrayList.get(position).getName());
+                    list.setImage(arrayList.get(position).getImage());
+                    list.setPrice(arrayList.get(position).getPrice());
+                    list.setDescription(arrayList.get(position).getDescription());
+                    list.setWishlist(true);
+                    arrayList.set(position, list);
+
+                    //holder.wishlist.setImageResource(R.drawable.wishlist_fill);
                 }
+                notifyDataSetChanged();
             }
         });
     }

@@ -1,8 +1,8 @@
 package edu.internship.brainy24;
 
 public class ProductList {
-    String wishlistid, id, categoryId, subcategoryId, name, image, description, price;
-    boolean isWishlist;
+    String wishlistid, id, categoryId, subcategoryId, name, image, description, price, brand;
+    boolean isWishlist = false;
 
     public boolean isWishlist() {
         return isWishlist;
@@ -74,5 +74,13 @@ public class ProductList {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

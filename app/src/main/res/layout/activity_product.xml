@@ -7,9 +7,17 @@
     android:background="@drawable/custom_background"
     tools:context=".ProductActivity">
 
+    <Spinner
+        android:id="@+id/product_brand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_brand"
+        android:layout_marginTop="@dimen/_10sdp" />
 
 </RelativeLayout>

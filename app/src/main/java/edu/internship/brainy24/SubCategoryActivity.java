@@ -16,8 +16,8 @@ public class SubCategoryActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     String[] categoryIdArray = {"1", "1", "1", "1", "2", "2", "2", "3", "3", "5", "5", "5"};
-    String[] nameArray = {"U.S.Polo", "H&M", "Louis Phillipe", "Allen Solly", "U.S.Polo", "Louis Phillipe", "Allen Solly", "Levis", "Mufti", "Adidas", "Puma", "Jordan"};
-    int[] imageArray = {R.drawable.uspolo, R.drawable.handm, R.drawable.louisphillipe, R.drawable.allensolly, R.drawable.uspolo, R.drawable.louisphillipe, R.drawable.allensolly, R.drawable.levis, R.drawable.mufti, R.drawable.adidas, R.drawable.puma, R.drawable.jordan};
+    String[] nameArray = {"U.S.Polo", "H&M", "Louis Phillipe", "Allen Solly", "U.S.Polo", "Louis Phillipe", "Allen Solly", "Levis", "Mufti", "Casual Shoes", "Sports Shoes", "Sneakers Shoes"};
+    int[] imageArray = {R.drawable.uspolo, R.drawable.handm, R.drawable.louisphillipe, R.drawable.allensolly, R.drawable.uspolo, R.drawable.louisphillipe, R.drawable.allensolly, R.drawable.levis, R.drawable.mufti, R.drawable.casual_shoes, R.drawable.sports_shoes, R.drawable.sneaker_shoes};
 
     ArrayList<SubCategoryList> arrayList;
 
