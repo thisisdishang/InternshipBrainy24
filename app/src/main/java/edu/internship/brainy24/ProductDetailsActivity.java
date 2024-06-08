@@ -46,6 +46,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
         String wishlistTableQuery = "CREATE TABLE IF NOT EXISTS WISHLIST(WISHLISTID INTEGER PRIMARY KEY,USERID VARCHAR(10),PRODUCTID VARCHAR(10))";
         db.execSQL(wishlistTableQuery);
 
+        String cartTableQyery = "CREATE TABLE IF NOT EXISTS CART(CARTID INTEGER PRIMARY KEY,USERID VARCHAR(10),ORDERID VARCHAR(10),PRODUCTID VARCHAR(10),QTY VARCHAR(10))";
+        db.execSQL(cartTableQyery);
+
         String selectQuery = "SELECT * FROM PRODUCT WHERE PRODUCTID='" + sp.getString(ConstantSp.PRODUCT_ID, "") + "'";
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.getCount() > 0) {
@@ -61,6 +64,21 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         wishlist = findViewById(R.id.product_details_wishlist);
         addcart = findViewById(R.id.product_details_cart);
+
+        addcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String selectCartQuery = "SELECT * FROM CART WHERE PRODUCTID='" + sp.getString(ConstantSp.PRODUCT_ID, "") + "' AND USERID='" + sp.getString(ConstantSp.USERID, "") + "' AND ORDERID='0'";
+                Cursor cursor1 = db.rawQuery(selectCartQuery, null);
+                if (cursor1.getCount() > 0) {
+                    new CommonMethod(ProductDetailsActivity.this, "Product Already Added In Cart");
+                } else {
+                    String cartQuery = "INSERT INTO CART VALUES (NULL,'" + sp.getString(ConstantSp.USERID, "") + "','0','" + sp.getString(ConstantSp.PRODUCT_ID, "") + "','1')";
+                    db.execSQL(cartQuery);
+                    new CommonMethod(ProductDetailsActivity.this, "Product Added In Cart");
+                }
+            }
+        });
 
         String wishlistSelectQuery = "SELECT * FROM WISHLIST WHERE USERID='" + sp.getString(ConstantSp.USERID, "") + "' AND PRODUCTID='" + sp.getString(ConstantSp.PRODUCT_ID, "") + "'";
         Cursor cursor1 = db.rawQuery(wishlistSelectQuery, null);
