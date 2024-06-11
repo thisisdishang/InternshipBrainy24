@@ -7,10 +7,40 @@
     android:background="@drawable/custom_background"
     tools:context=".CartActivity">
 
+    <LinearLayout
+        android:id="@+id/cart_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/_35sdp">
+
+        <TextView
+            android:id="@+id/cart_total"
+            style="@style/text_16"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:background="@color/mycolor4"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:text="Total: Rs.200" />
+
+        <TextView
+            android:id="@+id/cart_checkout"
+            style="@style/text_bold_15"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@color/mycolor1"
+            android:paddingHorizontal="@dimen/_11sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:text="Checkout" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/cart_bottom"
         android:layout_marginTop="@dimen/_25sdp" />
 
 </RelativeLayout>

@@ -54,7 +54,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
     public void onBindViewHolder(@NonNull CartAdapter.MyHolder holder, int position) {
         holder.imageView.setImageResource(Integer.parseInt(arrayList.get(position).getImage()));
         holder.name.setText(arrayList.get(position).getName());
-        holder.price.setText(ConstantSp.PRICE_SYMBOL + arrayList.get(position).getPrice());
+
+        int cartQty = Integer.parseInt(arrayList.get(position).getQty());
+        int proPrice = Integer.parseInt(arrayList.get(position).getPrice());
+        int cartPrice = proPrice * cartQty;
+
+        holder.price.setText(ConstantSp.PRICE_SYMBOL + arrayList.get(position).getPrice() + " * " + arrayList.get(position).getQty() + " = " + cartPrice);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +70,49 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
         });
 
         holder.qty.setText(arrayList.get(position).getQty());
+
+        holder.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int iQty = Integer.parseInt(arrayList.get(position).getQty()) + 1;
+                String sCartid = arrayList.get(position).getCartId();
+                updateCart(position, iQty, sCartid);
+            }
+        });
+
+        holder.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int iQty = Integer.parseInt(arrayList.get(position).getQty()) - 1;
+                String sCartid = arrayList.get(position).getCartId();
+
+                if (iQty <= 0) {
+                    String deleteQuery = "DELETE FROM CART WHERE CARTID='" + sCartid + "'";
+                    db.execSQL(deleteQuery);
+                    arrayList.remove(position);
+                    notifyDataSetChanged();
+                } else {
+                    updateCart(position, iQty, sCartid);
+                }
+            }
+        });
+    }
+
+    private void updateCart(int position, int iQty, String sCartid) {
+        String updateQuery = "UPDATE CART SET QTY='" + iQty + "' WHERE CARTID='" + sCartid + "'";
+        db.execSQL(updateQuery);
+        CartList list = new CartList();
+        list.setCartId(arrayList.get(position).getCartId());
+        list.setCategoryId(arrayList.get(position).getCategoryId());
+        list.setSubcategoryId(arrayList.get(position).getSubcategoryId());
+        list.setProductId(arrayList.get(position).getProductId());
+        list.setName(arrayList.get(position).getName());
+        list.setImage(arrayList.get(position).getImage());
+        list.setPrice(arrayList.get(position).getPrice());
+        list.setDescription(arrayList.get(position).getDescription());
+        list.setQty(String.valueOf(iQty));
+        arrayList.set(position, list);
+        notifyDataSetChanged();
     }
 
     @Override

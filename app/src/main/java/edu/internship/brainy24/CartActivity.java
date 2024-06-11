@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +19,13 @@ import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
 
+    public static TextView total;
     SQLiteDatabase db;
     SharedPreferences sp;
     RecyclerView recyclerView;
     ArrayList<CartList> arrayList;
+    TextView checkout;
+    public static int iCartTotal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,9 @@ public class CartActivity extends AppCompatActivity {
         String cartTableQyery = "CREATE TABLE IF NOT EXISTS CART(CARTID INTEGER PRIMARY KEY,USERID VARCHAR(10),ORDERID VARCHAR(10),PRODUCTID VARCHAR(10),QTY VARCHAR(10))";
         db.execSQL(cartTableQyery);
 
+        total = findViewById(R.id.cart_total);
+        checkout = findViewById(R.id.cart_checkout);
+
         recyclerView = findViewById(R.id.cart_recyclerview);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
@@ -74,6 +81,7 @@ public class CartActivity extends AppCompatActivity {
                     list.setImage(cursorProduct.getString(4));
                     list.setPrice(cursorProduct.getString(5));
                     list.setDescription(cursorProduct.getString(6));
+                    iCartTotal = Integer.parseInt(cursorProduct.getString(5)) * Integer.parseInt(cursor.getString(4));
                 }
                 list.setQty(cursor.getString(4));
                 arrayList.add(list);
@@ -81,6 +89,7 @@ public class CartActivity extends AppCompatActivity {
 
             CartAdapter adapter = new CartAdapter(CartActivity.this, arrayList, sp, db);
             recyclerView.setAdapter(adapter);
+            total.setText(String.valueOf(iCartTotal));
         } else {
             new CommonMethod(CartActivity.this, "No Any Product Added In Wishlist");
         }
