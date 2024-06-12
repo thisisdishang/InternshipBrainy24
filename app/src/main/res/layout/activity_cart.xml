@@ -7,40 +7,62 @@
     android:background="@drawable/custom_background"
     tools:context=".CartActivity">
 
-    <LinearLayout
-        android:id="@+id/cart_bottom"
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/cart_data_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="@dimen/_35sdp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/cart_total"
-            style="@style/text_16"
+        <LinearLayout
+            android:id="@+id/cart_bottom"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:background="@color/mycolor4"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:paddingVertical="@dimen/_5sdp"
-            android:text="Total: Rs.200" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="@dimen/_35sdp">
 
-        <TextView
-            android:id="@+id/cart_checkout"
-            style="@style/text_bold_15"
+            <TextView
+                android:id="@+id/cart_total"
+                style="@style/text_16"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:background="@color/mycolor4"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:text="Total: Rs.0"/>
+
+            <TextView
+                android:id="@+id/cart_checkout"
+                style="@style/text_bold_15"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@color/mycolor1"
+                android:paddingHorizontal="@dimen/_11sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:text="Checkout" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cart_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:background="@color/mycolor1"
-            android:paddingHorizontal="@dimen/_11sdp"
-            android:paddingVertical="@dimen/_5sdp"
-            android:text="Checkout" />
-    </LinearLayout>
+            android:layout_above="@+id/cart_bottom"
+            android:layout_marginTop="@dimen/_25sdp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cart_recyclerview"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/cart_empty_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/cart_bottom"
-        android:layout_marginTop="@dimen/_25sdp" />
+        android:background="#F8F8F8">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/cart_empty" />
+    </RelativeLayout>
 
 </RelativeLayout>

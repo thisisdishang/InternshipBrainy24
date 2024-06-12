@@ -76,7 +76,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
             public void onClick(View view) {
                 int iQty = Integer.parseInt(arrayList.get(position).getQty()) + 1;
                 String sCartid = arrayList.get(position).getCartId();
-                updateCart(position, iQty, sCartid);
+                updateCart(position, iQty, sCartid, "Plus");
             }
         });
 
@@ -87,18 +87,28 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
                 String sCartid = arrayList.get(position).getCartId();
 
                 if (iQty <= 0) {
+                    int iPrice = Integer.parseInt(arrayList.get(position).getPrice());
+                    CartActivity.iCartTotal -= iPrice;
+
+                    if (CartActivity.iCartTotal <= 0) {
+                        CartActivity.datalayout.setVisibility(View.GONE);
+                        CartActivity.emptylayout.setVisibility(View.VISIBLE);
+                    }
+
+                    CartActivity.total.setText("Total: " + ConstantSp.PRICE_SYMBOL + String.valueOf(CartActivity.iCartTotal));
+
                     String deleteQuery = "DELETE FROM CART WHERE CARTID='" + sCartid + "'";
                     db.execSQL(deleteQuery);
                     arrayList.remove(position);
                     notifyDataSetChanged();
                 } else {
-                    updateCart(position, iQty, sCartid);
+                    updateCart(position, iQty, sCartid, "Minus");
                 }
             }
         });
     }
 
-    private void updateCart(int position, int iQty, String sCartid) {
+    private void updateCart(int position, int iQty, String sCartid, String sType) {
         String updateQuery = "UPDATE CART SET QTY='" + iQty + "' WHERE CARTID='" + sCartid + "'";
         db.execSQL(updateQuery);
         CartList list = new CartList();
@@ -113,6 +123,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder> {
         list.setQty(String.valueOf(iQty));
         arrayList.set(position, list);
         notifyDataSetChanged();
+
+        int iPrice = Integer.parseInt(arrayList.get(position).getPrice());
+        if (sType.equalsIgnoreCase("Plus")) {
+            //CartActivity.iCartTotal = CartActivity.iCartTotal + iPrice;
+            CartActivity.iCartTotal += iPrice;
+        } else {
+            //CartActivity.iCartTotal = CartActivity.iCartTotal - iPrice;
+            CartActivity.iCartTotal -= iPrice;
+        }
+        CartActivity.total.setText("Total: " + ConstantSp.PRICE_SYMBOL + String.valueOf(CartActivity.iCartTotal));
     }
 
     @Override

@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +28,7 @@ public class CartActivity extends AppCompatActivity {
     ArrayList<CartList> arrayList;
     TextView checkout;
     public static int iCartTotal = 0;
+    public static RelativeLayout datalayout, emptylayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,8 @@ public class CartActivity extends AppCompatActivity {
 
         total = findViewById(R.id.cart_total);
         checkout = findViewById(R.id.cart_checkout);
+        datalayout = findViewById(R.id.cart_data_layout);
+        emptylayout = findViewById(R.id.cart_empty_layout);
 
         recyclerView = findViewById(R.id.cart_recyclerview);
 
@@ -81,7 +86,8 @@ public class CartActivity extends AppCompatActivity {
                     list.setImage(cursorProduct.getString(4));
                     list.setPrice(cursorProduct.getString(5));
                     list.setDescription(cursorProduct.getString(6));
-                    iCartTotal = Integer.parseInt(cursorProduct.getString(5)) * Integer.parseInt(cursor.getString(4));
+                    //iCartTotal = iCartTotal + Integer.parseInt(cursorProduct.getString(5)) * Integer.parseInt(cursor.getString(4));
+                    iCartTotal += Integer.parseInt(cursorProduct.getString(5)) * Integer.parseInt(cursor.getString(4));
                 }
                 list.setQty(cursor.getString(4));
                 arrayList.add(list);
@@ -89,9 +95,13 @@ public class CartActivity extends AppCompatActivity {
 
             CartAdapter adapter = new CartAdapter(CartActivity.this, arrayList, sp, db);
             recyclerView.setAdapter(adapter);
-            total.setText(String.valueOf(iCartTotal));
+            total.setText("Total: " + ConstantSp.PRICE_SYMBOL + String.valueOf(iCartTotal));
+            datalayout.setVisibility(View.VISIBLE);
+            emptylayout.setVisibility(View.GONE);
         } else {
             new CommonMethod(CartActivity.this, "No Any Product Added In Wishlist");
+            datalayout.setVisibility(View.GONE);
+            emptylayout.setVisibility(View.VISIBLE);
         }
 
     }
