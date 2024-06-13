@@ -73,6 +73,35 @@
                     android:padding="@dimen/_2sdp"
                     android:src="@drawable/addtocart" />
 
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:id="@+id/custom_product_cart_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/custom_product_minus"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/minus" />
+
+                    <TextView
+                        android:id="@+id/custom_product_qty"
+                        style="@style/text_bold_20"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/custom_product_plus"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/plus" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
 
