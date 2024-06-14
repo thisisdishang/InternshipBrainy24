@@ -54,8 +54,8 @@ public class CartActivity extends AppCompatActivity {
         String wishlistTableQuery = "CREATE TABLE IF NOT EXISTS WISHLIST(WISHLISTID INTEGER PRIMARY KEY,USERID VARCHAR(10),PRODUCTID VARCHAR(10))";
         db.execSQL(wishlistTableQuery);
 
-        String cartTableQyery = "CREATE TABLE IF NOT EXISTS CART(CARTID INTEGER PRIMARY KEY,USERID VARCHAR(10),ORDERID VARCHAR(10),PRODUCTID VARCHAR(10),QTY VARCHAR(10))";
-        db.execSQL(cartTableQyery);
+        String cartTableQuery = "CREATE TABLE IF NOT EXISTS CART(CARTID INTEGER PRIMARY KEY,USERID VARCHAR(10),ORDERID VARCHAR(10),PRODUCTID VARCHAR(10),QTY VARCHAR(10))";
+        db.execSQL(cartTableQuery);
 
         total = findViewById(R.id.cart_total);
         checkout = findViewById(R.id.cart_checkout);
@@ -103,6 +103,14 @@ public class CartActivity extends AppCompatActivity {
             datalayout.setVisibility(View.GONE);
             emptylayout.setVisibility(View.VISIBLE);
         }
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sp.edit().putString(ConstantSp.TOTAL_AMOUNT, String.valueOf(iCartTotal)).commit();
+                new CommonMethod(CartActivity.this, CheckoutActivity.class);
+            }
+        });
 
     }
 }
