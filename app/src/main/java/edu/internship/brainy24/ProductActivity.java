@@ -55,6 +55,9 @@ public class ProductActivity extends AppCompatActivity {
         String wishlistTableQuery = "CREATE TABLE IF NOT EXISTS WISHLIST(WISHLISTID INTEGER PRIMARY KEY,USERID VARCHAR(10),PRODUCTID VARCHAR(10))";
         db.execSQL(wishlistTableQuery);
 
+        String cartTableQuery = "CREATE TABLE IF NOT EXISTS CART(CARTID INTEGER PRIMARY KEY,USERID VARCHAR(10),ORDERID VARCHAR(10),PRODUCTID VARCHAR(10),QTY VARCHAR(10))";
+        db.execSQL(cartTableQuery);
+
 
         for (int i = 0; i < nameArray.length; i++) {
             String selectQuery = "SELECT * FROM PRODUCT WHERE NAME='" + nameArray[i] + "'AND SUBCATEGORYID='" + subcategoryIdArray[i] + "' AND CATEGORYID='" + categoryIdArray[i] + "'";
