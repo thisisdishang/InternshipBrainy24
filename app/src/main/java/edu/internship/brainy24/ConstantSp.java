@@ -16,5 +16,6 @@ public class ConstantSp {
     public static final String SUB_CATEGORY_NAME = "subcategoryname";
     public static final String PRICE_SYMBOL = "₹";
     public static final String PRODUCT_ID = "productid";
-    public static final String TOTAL_AMOUNT="total_amount";
+    public static final String TOTAL_AMOUNT = "total_amount";
+    public static final String ORDER_ID = "order_id";
 }
